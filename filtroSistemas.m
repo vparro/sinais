@@ -1,0 +1,1 @@
+%% Definindo o filtro e ser utilizado%% Criando o filtro passa baixas - FPBwc = 2*pi;                % frequência de corteHFPB = @(w,wc)     wc./(j*w+wc)H    = tf(wc,[w wc])

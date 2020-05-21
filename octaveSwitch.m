@@ -1,0 +1,1 @@
+function  [D_o,Dn,f,Pg,PN] = sFourier(sinal)pkg load symbolic;         % somente para quem usa Octavewarning ("off");%%% StructureA = sinal.tipo;             % Seleciona o tipo de sinalswitch A  case {"quadrada"}    disp("Sinal quadrado");      .....     case {"outroTipo"}    disp("outroTipo");               otherwise    disp("sinal não definido");endswitch

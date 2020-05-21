@@ -1,0 +1,1 @@
+%%%%%%%%% No tempo  %%%%%%%%%%%%%%%%%% Simulando um diodo ideal  AM_diodo = modulado.*(modulado>1);

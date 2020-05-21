@@ -3,7 +3,7 @@
 clear all;
 clc;
 close all;
-pkg load symbolic;
+pkg load symbolic;                    % Somente para Octave
 
 %% Definindo o sinal a ser estudado
 
@@ -38,7 +38,7 @@ title('Sinal g(t)')
 xlabel('Tempo em segundos')
 ylabel('Amplitude em volts')
 
-%% Determinando o valor médio
+%% Determinando o valor médio e o termo Dn
 
 syms n t
 

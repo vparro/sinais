@@ -1,0 +1,1 @@
+%%%%%%%%% Análise  %%%%%%%%%%%%%%%%%%%%%%%%% Analisando o sinal modulado - AM_mod(t) %% Tempo para frequência  [D_om,Dnm,fm,Pgm,PNm] = sFourier(AM);  disp("Valor Médio:"); D_om  disp("Potência:"); Pgm  disp("Potência (N):"); PNm(end)  ........ %% Sintetizando o sinal%% Frequência para tempo  [tempo,modulado] = sinteseFourier (sintese);

@@ -1,0 +1,1 @@
+%% Sintetizando o sinaln=[-N:1:N];aux  = 0;             for k = 0 : 2*N          aux = aux + Dn(k+1)*exp(j*n(k+1)*wo*tempo);  endgr = aux;

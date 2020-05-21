@@ -1,0 +1,1 @@
+%%% Valores calculados fo = inv(To);            % frequência em Hz wo = 2*pi*fo;            % frequência angular N = 10;                  % Número de harmônicas da análise n=[-N:1:N];              % índice de cada harmônica f = n*fo;                % vetor de frequências da análise de Fourier

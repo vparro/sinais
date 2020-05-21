@@ -36,6 +36,12 @@ function [tempo,sinal] = sinteseFourier (sintese)
  To = sintese.periodo;
  Dn = sintese.Dn;
  N  = sintese.N;
+<<<<<<< HEAD
+ 
+%%% Calculados
+ 
+=======
+>>>>>>> 34f90e00111b138cc89f9626e434beb646c23769
  Ts = To/M;
  wo = 2*pi/To;
  tempo = [0:Ts:NP*To];            % Tempo de simulação de um período do sinal s(t)
@@ -44,6 +50,11 @@ function [tempo,sinal] = sinteseFourier (sintese)
 
 n=[-N:1:N];
 aux  = 0;             
+<<<<<<< HEAD
+for k = 0 : 2*N      
+  aux = aux + Dn(k+1)*exp(j*n(k+1)*wo*tempo);
+end
+=======
 
 
 for k = 0 : 2*N      
@@ -52,6 +63,7 @@ for k = 0 : 2*N
   
 end
 
+>>>>>>> 34f90e00111b138cc89f9626e434beb646c23769
 sinal = aux;
 
 

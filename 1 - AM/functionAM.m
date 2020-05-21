@@ -1,0 +1,1 @@
+## Author: 1 <a1@MacBook-Pro-de-1.local>## Created: 2020-04-11function  [D_o,Dn,f,Pg,PN] = sFourier(sinal)pkg load symbolic;         % somente para quem usa Octavewarning ("off");A = sinal.tipo             % Seleciona o tipo de sinalswitch A  case {"quadrada"}    disp("Sinal quadrado");    

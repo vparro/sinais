@@ -1,0 +1,1 @@
+%% Comparando com o valor calculadoSFcalc = @(n,To,tau,A1,A2) (A1*tau/To)*sinc(n*tau/To).*exp(-j*n*wo*tau/2) - A2*tau*sinc(n*tau/To).*exp(-j*n*wo*3*tau/2)/ToDnc =SFcalc(n,To,tau,A1,A2)

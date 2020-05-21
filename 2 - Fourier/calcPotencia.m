@@ -1,0 +1,1 @@
+%% Determinando a potência do sinal g(t)Pg = inv(To)*int(A1^2,t,0,tau) + inv(To)*int(A2^2,t,tau,To)Pg = eval(Pg)%%% Verifica a potência pelo teorema de PaservalPN = cumsum([Dn(N+1)^2 2*abs(Dn(N+2:end)).^2])

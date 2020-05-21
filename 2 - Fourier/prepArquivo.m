@@ -1,0 +1,1 @@
+%%% Vetor tempo para visualização do sinal%%% diferente da variável simbólica t%%% para efeito de organização da solução%%% existem outros caminhos M = 1000; Ts = To/M; tempo = [0:Ts:To];            % Tempo de simulação de um período do sinal g(t)

@@ -1,0 +1,1 @@
+%% Definindo o sinal a ser estudado%% Ona pulsada de dois níveis, período To e largura tau A1 = 1;                  % Amplitude em nível alto A2 = 0;                  % Amplitude em nível baixo tau = 0.5;               % Duração em nível alto To = 1;                  % Período
