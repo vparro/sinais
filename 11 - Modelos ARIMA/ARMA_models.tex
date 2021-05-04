@@ -1,0 +1,270 @@
+% -------------------------------------------------------------------------------
+\documentclass[10pt,hyperref={pdfpagelabels=false}]{beamer}
+\let\Tiny=\tiny
+% -------------------------------------------------------------------------------
+%\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{schemabloc}
+\usepackage{ifthen}
+\usepackage{amssymb,amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[english,brazil,brazilian]{babel}
+
+%\usepackage[round, sort, authoryear]{natbib}
+%\bibliographystyle{plainnat}
+
+% ------------------------------------------------------------------------
+\usepackage{listings}
+%\usepackage{xcolor}
+
+\lstdefinestyle{mystyle}{ 
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+%    numbers=left,                    
+%    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+% -------------------------------------------------------------------------------
+\mode<presentation> {
+  \usetheme{JuanLesPins}%AnnArbor
+  \useinnertheme{rounded}
+  \useoutertheme[]{smoothtree}
+%  \usecolortheme{wolverine}
+  \usefonttheme[onlymath]{serif}
+  \setbeamercovered{transparent}
+  \usebeamertemplate*{logo}
+}
+% It makes your presentation go automatically to full screen
+\hypersetup{pdfpagemode=FullScreen}
+
+\title{Estruturas ARMA para modelar séries temporais}
+\author{Rodrigo A. Romano}
+\date{Maio, 2021}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section[Outline]{}
+\frame{\tableofcontents}
+
+
+\section{Preâmbulo}
+
+
+\frame{
+\frametitle{Séries temporais}
+
+Razões pelas quais podemos estar interessados em modelos de séries temporais incluem
+\begin{itemize}
+\item Obter informações e compreender melhor os fenômenos que regem a série temporal em questão;
+\item Realizar previsões;
+\item Detectar mudanças de padrão de comportamento.
+\end{itemize}
+
+Uma série temporal amostrada uniformemente pode ser representada por uma sequência de valores no domínio do tempo discreto, ou seja
+\[
+x_k \in \{0, 1, 2, \ldots, N\} .
+\]
+
+}
+
+
+\section{A família de modelos ARMA}
+
+\frame{
+\frametitle{Modelos MA (moving average)}
+
+Equação de diferenças:
+\[
+x_k = \mu + \epsilon_k + c_1 \epsilon_{k-1} + \ldots + c_{n_c} \epsilon_{k-n_c},
+\]
+onde $\mu$ é a média da série temporal, $c_i$ ($i=\{1,\ldots,n_c\}$) são os coeficientes do modelo e $\epsilon_k$ é idealmente uma realização de um ruído branco de distribuição normal, média nula e variância  $\sigma^2$.
+
+\begin{block}{Exemplo: Processo MA  de primeira ordem ($c_1=0.9$) com média nula}
+Equação de diferenças: $x_k = \epsilon_k + 0.9 \epsilon_{k-1}$
+
+Diagrama de blocos:
+%\vspace*{10pt}
+\begin{center}
+\begin{tikzpicture}
+\sbEntree{E1}
+\sbBloc[3]{Bloc}{$1 + 0.9q^{-1}$}{E1}
+\sbRelier[$\epsilon_k$]{E1}{Bloc}
+\sbSortie[3]{S1}{Bloc}
+\sbRelier[$x_k$]{Bloc}{S1}
+\end{tikzpicture}
+\end{center}
+
+\end{block}
+
+}
+
+
+\frame{
+\frametitle{Modelos AR (auto--regressive)}
+
+Equação de diferenças:
+\[
+x_k = a_1 x_{k-1} + \ldots + a_{n_a} x_{k-n_a} + \epsilon_k,
+\]
+onde $a_i$ ($i=\{1,\ldots,n_a\}$) são os coeficientes do modelo e $\epsilon_k$ é idealmente uma realização de um ruído branco de distribuição normal, média nula e variância  $\sigma^2$.
+
+\begin{block}{Exemplo: Processo AR de segunda ordem com média nula}
+
+Equação de diferenças: $x_k = 1.5 x_{k-1} - 0.7 x_{k-2} + \epsilon_k$
+
+Diagrama de blocos:
+%\vspace*{10pt}
+\begin{center}
+\begin{tikzpicture}
+\sbEntree{E1}
+\sbBloc[3]{Bloc}{$\dfrac{1}{1 -1.5q^{-1}+ 0.7q^{-2}}$}{E1}
+\sbRelier[$\epsilon_k$]{E1}{Bloc}
+\sbSortie[3]{S1}{Bloc}
+\sbRelier[$x_k$]{Bloc}{S1}
+\end{tikzpicture}
+\end{center}
+Pólos complexos: $q_{1,2}= 0.75 \pm 0.371i$
+\end{block}
+
+}
+
+
+\frame{
+\frametitle{Modelos ARMA}
+
+Podemos combinar os termos MA e AR para obter o modelo ARMA:
+\begin{align*}
+x_k = & a_1 x_{k-1} + \ldots + a_{n_a} x_{k-n_a} \\
+	& + \epsilon_k + c_1 \epsilon_{k-1} + \ldots + c_{n_c} \epsilon_{k-n_c}.
+\end{align*}
+que também pode ser expresso por
+
+\[
+(1 - a_1 q^{-1} - \ldots - a_{n_a} q^{-n_a}) x_{k}
+= (1 - c_1 q^{-1} - \ldots - c_{n_c} q^{-n_c}) \epsilon_{k} ,
+\]
+
+ou ainda $A(q) x_{k} = C(q) \epsilon_{k}$, com
+\begin{align*}
+A(q) & = (1 - a_1 q^{-1} - \ldots - a_{n_a} q^{-n_a}) \\
+C(q) & = (1 - c_1 q^{-1} - \ldots - c_{n_c} q^{-n_c}).
+\end{align*}
+
+
+}
+
+
+\frame{
+\frametitle{Modelos ARIMA}
+
+Um caso particular interessante dos modelos ARMA é obtido quando assume-se $n_i$ pólos integradores (I) no modelo da série temporal $x_k$, ou seja
+\[
+A(q) (1-q^{-1})^{n_i} x_{k} = C(q) \epsilon_{k}
+\]
+
+Note que
+\begin{align*}
+w_k & = (1-q^{-1}) x_{k} \\
+	& = x_{k} - x_{k-1}
+\end{align*}
+pode ser vista como a derivada numérica de $x_{k}$.
+
+Modelos ARIMA são tipicamente caracterizados pela tripla $\left(n_a, n_i, n_c \right)$ que define estrutura particular para representar uma série temporal.
+
+}
+
+\section{Ferramentas de software}% A biblioteca statsmodels
+
+
+\begin{frame}[fragile]
+%{A }
+
+Biblioteca \textsf{statsmodels}: \url{https://www.statsmodels.org/stable/index.html}
+
+
+\begin{itemize}
+\item Geração de séries temporais;\\
+\begin{lstlisting}[language=Python]
+from statsmodels.tsa.arima_process import arma_generate_sample
+\end{lstlisting}
+%
+\item Estimação dos parâmetros de modelos ARMA;\\
+\begin{lstlisting}[language=Python]
+from statsmodels.tsa.arima.model import ARIMA
+\end{lstlisting}
+
+\item Gráficos de análise.\\
+\begin{lstlisting}[language=Python]
+from statsmodels.tsa.stattools import pacf
+from statsmodels.tsa.stattools import acf
+from statsmodels.graphics.tsaplots import plot_pacf
+from statsmodels.graphics.tsaplots import plot_acf
+\end{lstlisting}
+\end{itemize}
+
+\end{frame}
+
+
+
+
+\section{Exemplos didáticos}% A biblioteca statsmodels
+\frame{
+\frametitle{}
+
+Vamos exercitar as ideias discutidas anteriormente através de um notebook \alert{ARMA\_models.ipynb}
+
+}
+
+
+
+\section{Considerações finais}
+
+\frame{
+\frametitle{}
+\begin{enumerate}
+\item 
+\item 
+\item 
+\item 
+\end{enumerate}
+}
+
+\end{document}
+
+
+
+
+
+
+\begin{block}{Exemplo: Processo AR de segunda ordem com média nula}
+
+Equação de diferenças: $x_k = 1.5 x_{k-1} - 0.7 x_{k-2} + \epsilon_k$
+
+Diagrama de blocos:
+%\vspace*{10pt}
+\begin{center}
+\begin{tikzpicture}
+\sbEntree{E1}
+\sbBloc[3]{Bloc}{$\dfrac{1}{1 -1.5q^{-1}+ 0.7q^{-1}}$}{E1}
+\sbRelier[$\epsilon_k$]{E1}{Bloc}
+\sbSortie[3]{S1}{Bloc}
+\sbRelier[$x_k$]{Bloc}{S1}
+\end{tikzpicture}
+\end{center}
+Pólos complexos: $q_{1,2}= 0.75 \pm 0.371i$
+\end{block}
+
