@@ -83,7 +83,7 @@ gr = aux;
 %% Visualizando o sinal reconstruido
 
 figure(3)
-plot(tempo1,gt1(tempo1),tempo2,gt2(tempo2),tempo,gr)
+plot(tempo1,gt1(tempo1),tempo2,gt2(tempo2),tempo,gr, "linewidth", 3)
 % plot(tempo,gr)
 title('Reconstrução do sinal g(t)');
 xlabel('Tempo em segundos');

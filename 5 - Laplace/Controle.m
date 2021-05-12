@@ -1,0 +1,1 @@
+%%% Definindo os valores de R,L,CR = 1;L = 1;C = 1;Ganho = @(s,R,L,C) (s/L)./(s.^2 + s*R/L + 1/(L*C));R = [0 1 2 3 4 5 6 7 8 9 ];tempo = linspace(0,10,1000);for k = 1 : 10  Gs    = tf([1/L 0],[1 R(k)/L 1/(L*C)]);y(:,k) = impulse(Gs,tempo);endsurf(y)
