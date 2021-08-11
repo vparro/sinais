@@ -1,0 +1,1 @@
+        pkg install optim        %%% cria o vetor x parametrizado:        x0 = 0; step = 0.05; xend = 5; x = x0:step:xend;        %%% determina y artificialmente        y = 2*exp(1.3*x)-0.5*exp(2*x);        %%% Aplica o algoritmo de ajuste        error = (rand(1,length(y))-0.5)*1e-4;    [alpha,c,rms] = expfit(2,x0,step,y+error)
