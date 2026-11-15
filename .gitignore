@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+# Matlab / Simulink
+*.asv
+*.autosave
+*.slxc
+*.mexmaci64
+slprj/
+codegen/
+octave-workspace
+# Python
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+venv/
